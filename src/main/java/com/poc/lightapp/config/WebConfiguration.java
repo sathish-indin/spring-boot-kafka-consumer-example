@@ -1,22 +1,25 @@
-package com.techprimers.kafka.springbootkafkaconsumerexample.config;
+package com.poc.lightapp.config;
 
-import com.techprimers.kafka.springbootkafkaconsumerexample.model.User;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
-import org.springframework.kafka.support.serializer.JsonDeserializer;
+import org.springframework.web.context.WebApplicationContext;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @EnableKafka
 @Configuration
-public class KafkaConfiguration {
+public class WebConfiguration {
 
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
@@ -58,4 +61,11 @@ public class KafkaConfiguration {
 //        return factory;
 //    }
 
+
+
+    @Bean
+    @Scope(value = WebApplicationContext.SCOPE_APPLICATION, proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public List<String> seatList() {
+        return new ArrayList<String>();
+    }
 }

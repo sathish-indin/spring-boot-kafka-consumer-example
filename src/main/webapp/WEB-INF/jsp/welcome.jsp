@@ -7,6 +7,51 @@
 	<!-- Access the bootstrap Css like this,
 		Spring boot will handle the resource mapping automcatically -->
 	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.maphilight.min.js"></script>
+<script type="text/javascript">$(function() {
+		$('.map').maphilight({fade: false});
+	});
+
+   function highlightSeat(result){
+    $('#s21').mouseout();
+
+
+     if(result == "S21"){
+      $('#s21').mouseover();
+     }
+   }
+	var isActive = true;
+
+    $().ready(function () {
+        //EITHER USE A GLOBAL VAR OR PLACE VAR IN HIDDEN FIELD
+        //IF FOR WHATEVER REASON YOU WANT TO STOP POLLING
+        pollServer();
+    });
+
+    function pollServer()
+    {
+        if (isActive)
+        {
+            window.setTimeout(function () {
+                $.ajax({
+                    url: "/light/status",
+                    type: "GET",
+                    success: function (result) {
+                        //SUCCESS LOGIC
+                        //alert(result);
+                        highlightSeat(result);
+                        pollServer();
+                    },
+                    error: function () {
+                        //ERROR HANDLING
+                        pollServer();
+                    }});
+            }, 2500);
+        }
+    }
+
+	</script>
 
 	<!--
 	<spring:url value="/css/main.css" var="springCss" />
@@ -18,29 +63,14 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-inverse">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Spring Boot</a>
-			</div>
-			<div id="navbar" class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#about">About</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
 
 	<div class="container">
 
-		<div class="starter-template">
-			<h1>Spring Boot Web JSP Example</h1>
-			<h2>Message: ${message}</h2>
-		</div>
-
+		<img class="map" src="images/787-8a.png" width="924" height="264" usemap="#787">
+		<map name="787">
+            <area id="s21" target="" alt="" title="21" href="" coords="636,98,651,113" shape="rect">
+        </map>
 	</div>
-
 	<script type="text/javascript" src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>

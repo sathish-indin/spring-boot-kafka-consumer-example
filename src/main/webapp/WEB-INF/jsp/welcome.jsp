@@ -23,6 +23,20 @@
         $('.s21').on("click", function(e){
                 e.preventDefault();
                 alert("onclick");
+
+                $.ajax({
+                   url: "/light/off",
+                   type: "POST",
+                    success: function (result) {
+                        //SUCCESS LOGIC
+                        //alert(result);
+                        highlightSeat(result);
+                        pollServer();
+                    },
+                    error: function () {
+                        //ERROR HANDLING
+                        pollServer();
+                    }});
         });
     });
 

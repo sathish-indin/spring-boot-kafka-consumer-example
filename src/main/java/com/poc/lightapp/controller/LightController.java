@@ -4,6 +4,7 @@ import com.mbed.coap.client.CoapClient;
 import com.mbed.coap.client.CoapClientBuilder;
 import com.mbed.coap.exception.CoapException;
 import com.mbed.coap.packet.CoapPacket;
+import com.mbed.coap.packet.MediaTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +37,7 @@ private List<String> seatList;
         CoapClient client = null;
         try {
             client = CoapClientBuilder.newBuilder(new InetSocketAddress("localhost",5683)).build();
-            CoapPacket coapResp = client.resource("/").sync().get();
+            CoapPacket coapResp = client.resource("/").payload("0", MediaTypes.CT_TEXT_PLAIN).sync().get();
 
             //coapResp = client.resource("/a/relay").payload("1", MediaTypes.CT_TEXT_PLAIN).sync().put();
 

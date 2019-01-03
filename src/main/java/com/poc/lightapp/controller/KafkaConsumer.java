@@ -15,7 +15,11 @@ public class KafkaConsumer {
     @KafkaListener(topics = "light", group = "group_id")
     public void consume(String message) {
         System.out.println("Consumed message: " + message);
-        if (message.equals("1")) { seatList.add("S21"); } else { seatList.remove("S21");}
+
+        //int val=Integer.parseInt(message);
+        float fVal = Float.parseFloat(message);
+        System.out.println(Math.round(fVal));
+        if (Math.round(fVal) == 1) { seatList.add("S21"); } else { seatList.remove("S21");}
     }
 
 

@@ -22,13 +22,4 @@ public class KafkaConsumer {
         if (Math.round(fVal) == 1) { seatList.add("S21"); } else { seatList.remove("S21");}
     }
 
-
-
-/*    @KafkaListener(topics = "light", group = "group_json",
-            containerFactory = "userKafkaListenerFactory")
-    public void consumeJson(User user) {
-        System.out.println("Consumed JSON Message: " + user);
-    }*/
-
-
 }

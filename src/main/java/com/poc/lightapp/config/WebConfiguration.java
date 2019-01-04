@@ -2,6 +2,7 @@ package com.poc.lightapp.config;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -39,6 +40,12 @@ public class WebConfiguration {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory();
         factory.setConsumerFactory(consumerFactory());
         return factory;
+    }
+
+    @Bean
+    public SystemParam getSystemParam(
+            @Value("${deviceIp}") String argumentValue) {
+        return new SystemParam(argumentValue);
     }
 
 

@@ -19,7 +19,7 @@ public class KafkaConsumer {
         //int val=Integer.parseInt(message);
         float fVal = Float.parseFloat(message);
         System.out.println(Math.round(fVal));
-        if (Math.round(fVal) == 0) { seatList.add("S21"); } else { seatList.remove("S21");}
+        if (Math.round(fVal) == 1) { seatList.remove("S21"); } else { seatList.add("S21");}
     }
 
 }

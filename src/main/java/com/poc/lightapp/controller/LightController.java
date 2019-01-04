@@ -41,7 +41,7 @@ public class LightController {
         try {
 
             client = CoapClientBuilder.newBuilder(new InetSocketAddress(systemParam.getIp(),5683)).build();
-            CoapPacket coapResp = client.resource("/").payload("0", MediaTypes.CT_TEXT_PLAIN).sync().get();
+            CoapPacket coapResp = client.resource("/light").payload("1", MediaTypes.CT_TEXT_PLAIN).sync().put();
             client.close();
         } catch (IOException | CoapException e) {
             e.printStackTrace();
